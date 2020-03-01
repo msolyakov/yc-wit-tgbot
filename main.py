@@ -2,17 +2,15 @@ import json
 
 def handler(event, context):
 
-    # name = 'World'
-    #if 'queryStringParameters' in event and 'name' in event['queryStringParameters']:
-    #    name = event['queryStringParameters']['name']
-
-    body = json.loads(event["body"])
+    body = json.loads(event['body'])
+    message = body['message']
+    chat = message['chat']
 
     answer = {
-           "method": 'sendMessage',
-           "chat_id": body.message.chat.id,
+           'method': 'sendMessage',
+           'chat_id': chat['id'],
            # "reply_to_message_id" : message["message_id"],
-           "text" : body.message.text
+           'text' : 'You wrote: ' + message['text']
     }
 
     return {
