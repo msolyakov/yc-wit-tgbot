@@ -1,0 +1,12 @@
+{
+    "body":
+    {
+        "message" : 
+        {
+            "chat": {
+                "id" : "1334"
+            },
+            "text": "test"
+        }
+    }
+}
