@@ -1,4 +1,5 @@
 import json
+from yandex.function import response
 
 def handler(event, context):
 
@@ -10,14 +11,7 @@ def handler(event, context):
            'method': 'sendMessage',
            'chat_id': chat['id'],
            # "reply_to_message_id" : message["message_id"],
-           'text' : 'You wrote: ' + message['text']
+           'text' : 'v.0.1: ' + message['text'] # TODO: Add version in debug mode 
     }
 
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-        'body': json.dumps(answer),
-        'isBase64Encoded': False
-    }
+    return response.create_text(answer)

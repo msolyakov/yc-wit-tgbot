@@ -1,0 +1,1 @@
+python -m unittest tests/main_test.py
