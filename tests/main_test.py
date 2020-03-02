@@ -2,8 +2,8 @@ from __future__ import absolute_import
 
 import unittest
 
-from yandex.function import request
-from yandex.function import response
+from yacloud.function import request
+from yacloud.function import response
 import main
 
 class HandlerTest(unittest.TestCase):
@@ -27,6 +27,7 @@ class HandlerTest(unittest.TestCase):
         self.assertNotIsInstance(resp["body"], type(dict))
         self.assertTrue(resp["body"]) 
 
+        print(req)
         print(resp)
 
 

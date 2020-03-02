@@ -1,5 +1,5 @@
 import json
-from yandex.function import response
+from yacloud.function import response
 
 def handler(event, context):
 
@@ -11,7 +11,7 @@ def handler(event, context):
            'method': 'sendMessage',
            'chat_id': chat['id'],
            # "reply_to_message_id" : message["message_id"],
-           'text' : 'v.0.1: ' + message['text'] # TODO: Add version in debug mode 
+           'text' : 'v.0.1.1: ' + message['text'] # TODO: Add version in debug mode 
     }
 
     return response.create_text(answer)
