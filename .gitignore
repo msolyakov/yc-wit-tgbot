@@ -18,6 +18,7 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+*.pyc
 *.sw*
 token.txt
 yc-wit-tgbot.zip

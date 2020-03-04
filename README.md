@@ -1,6 +1,10 @@
 # Summary
 
-Теlegram Bot uses Wit and Yandex Cloud Functions
+Теlegram Bot uses Wit and Yandex Cloud Functions.
+
+# References
+
+Types and helpers for telegram API were used from https://github.com/eternnoir/pyTelegramBotAPI
 
 ##### Before you start
 
