@@ -1,5 +1,6 @@
 import json
 from yacloud.function import response
+from telebot import bothelper
 
 def handler(event, context):
 
@@ -7,11 +8,5 @@ def handler(event, context):
     message = body['message']
     chat = message['chat']
 
-    answer = {
-           'method': 'sendMessage',
-           'chat_id': chat['id'],
-           # "reply_to_message_id" : message["message_id"],
-           'text' : 'v.0.1.1: ' + message['text'] # TODO: Add version in debug mode 
-    }
-
+    answer = bothelper.new_message(chat['id'], 'v.0.1.2: ' + message['text']) # TODO: Send version by command 
     return response.create_text(answer)
