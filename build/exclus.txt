@@ -1,0 +1,11 @@
+.git
+.vscode
+__pycache__
+tests
+.gitignore
+pack.cmd
+pack_excl.txt
+Pipfile
+Pipfile.lock
+README.md
+token.txt

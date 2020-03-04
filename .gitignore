@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/__pycache__
 
 # local env files
 .env.local
@@ -22,3 +23,4 @@ yarn-error.log*
 *.sw*
 token.txt
 yc-wit-tgbot.zip
+pack*.zip
