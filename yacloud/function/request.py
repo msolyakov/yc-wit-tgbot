@@ -9,6 +9,6 @@ def create_post(body):
         # "queryStringParameters": <словарь queryString-параметров>,
         # "multiValueQueryStringParameters": <словарь списков значений queryString-параметров>,
         # "requestContext": <словарь с контекстом запроса>,
-        "body": json.dumps(body), # body is an object to request with
+        "body": json.dumps(body, ensure_ascii=False), # body is an object to request with
         "isBase64Encoded": False
     }

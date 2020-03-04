@@ -15,7 +15,7 @@ class HandlerTest(unittest.TestCase):
                 'chat': {
                     'id' : '1234'
                 },
-                'text': 'test'
+                'text': 'Hi!!!'
             }
         }
 

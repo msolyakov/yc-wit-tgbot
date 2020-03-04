@@ -9,8 +9,6 @@ import json
 import logging
 import os
 import requests
-from prompt_toolkit import prompt
-from prompt_toolkit.history import InMemoryHistory
 
 WIT_API_HOST = os.getenv('WIT_URL', 'https://api.wit.ai')
 WIT_API_VERSION = os.getenv('WIT_API_VERSION', '20160516')
@@ -93,24 +91,3 @@ class Wit(object):
         resp = req(self.logger, self.access_token, 'POST', '/speech', params,
                    data=audio_file, headers=headers)
         return resp
-
-    def interactive(self, handle_message=None, context=None):
-        """Runs interactive command line chat between user and bot. Runs
-        indefinitely until EOF is entered to the prompt.
-
-        handle_message -- optional function to customize your response.
-        context -- optional initial context. Set to {} if omitted
-        """
-        if context is None:
-            context = {}
-
-        history = InMemoryHistory()
-        while True:
-            try:
-                message = prompt(INTERACTIVE_PROMPT, history=history, mouse_support=True).rstrip()
-            except (KeyboardInterrupt, EOFError):
-                return
-            if handle_message is None:
-                print(self.message(message, context))
-            else:
-                print(handle_message(self.message(message, context)))
