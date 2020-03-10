@@ -12,7 +12,6 @@ Before getting started, you should have the following installed and running:
 
 - [X] Python 3.7 32bit
 - [X] Pipenv - [instructions] pip install pipenv
-- [X] Wit.ai SDK - [instructions] pipenv install wit
 
 * Setup virtual environment, install dependencies, and activate it:
 

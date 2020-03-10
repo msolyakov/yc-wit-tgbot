@@ -2,6 +2,7 @@
 .vscode
 __pycache__
 tests
+build
 .gitignore
 pack.cmd
 pack_excl.txt
