@@ -18,6 +18,6 @@ def create_text(body):
         'headers': {
             'Content-Type': 'application/json'
         },
-        'body': json.dumps(body),
+        'body': json.dumps(body, ensure_ascii=False),
         'isBase64Encoded': False
     }

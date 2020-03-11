@@ -1,46 +1,34 @@
 import os
 import json
 from yacloud.function import response
-from telebot import bothelper
-from wit import Wit
+from telebot import bothelper, msghandler
+from wit import withelper
 
 def handler(event, context):
+    answer = None
+    try:
+        body = json.loads(event['body'])
+        msgh = msghandler.MsgHandler(handle_command, handle_text, handle_voice)
+        answer = msgh.handle_message(body)
+    except Exception as ex: 
+        if os.environ.get('DEBUG') == 'TRUE':
+            answer = 'Error occured: \r\n' + ex.__str__ #TODO: Add logging
 
-    body = json.loads(event['body'])
-    input_text = body['message']['text']
-    chat_id = body['message']['chat']['id']
-
-    wit_token = os.environ.get('WIT_TOKEN')
-    wit_client = Wit(access_token=wit_token)
-    answer_text = handle_message(wit_client.message(input_text))
-
-    answer = bothelper.new_message(chat_id, 'v.0.2.0. ' + answer_text) # TODO: Send version by command 
-    return response.create_text(answer)
+    return response.create_text(answer) if answer else response.create_empty()
 
 
-def handle_message(response):
-    """
-    Customizes our response to the message and sends it
-    """
-    entities = response['entities']
-    # Checks if user's message is a greeting
-    # Otherwise we will just repeat what they sent us
-    greetings = first_entity_value(entities, 'greetings')
-    if greetings:
-        text = "Hello!"
-    else:
-        text = response['_text']
+def handle_command(cmd, args):
+    # TODO
+    _result = None
+    if cmd == 'ver': # Send version by command 
+        _result = 'v.0.3.0'
+    
+    return _result
+
+def handle_text(text):
+    # return withelper.prosess_text(text)
     return text
 
-
-def first_entity_value(entities, entity):
-    """
-    Returns first entity value
-    """
-    if entity not in entities:
-        return None
-    val = entities[entity][0]['value']
-    if not val:
-        return None
-    return val['value'] if isinstance(val, dict) else val
+def handle_voice(audio):
+    return 'Voice processing will be implemented soon'
 
