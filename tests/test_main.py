@@ -11,7 +11,10 @@ class Test_MainHandler(unittest.TestCase):
 
     def test_main_text(self):
 
-        test_body = json.loads(r'{"message_id":1,"from":{"id":108929734,"first_name":"Wit","last_name":"Bot","username":"tg-wit-bot","is_bot":true},"chat":{"id":1734,"first_name":"Ivan","type":"private","last_name":"Ivanov","username":"iivanov"},"date":1435296025,"text":"TEST"}')
+        message_body = json.loads(r'{"message_id":1,"from":{"id":108929734,"first_name":"Wit","last_name":"Bot","username":"tg-wit-bot","is_bot":true},"chat":{"id":1734,"first_name":"Ivan","type":"private","last_name":"Ivanov","username":"iivanov"},"date":1435296025,"text":"TEST"}')
+        test_body = {
+            "message": message_body
+        }
 
         req = request.create_post(test_body)
         resp = main.handler(event=req, context={})
@@ -24,7 +27,10 @@ class Test_MainHandler(unittest.TestCase):
     
     def test_main_cmd(self):
 
-        test_body = json.loads(r'{"message_id":1,"from":{"id":108929734,"first_name":"Wit","last_name":"Bot","username":"tg-wit-bot","is_bot":true},"chat":{"id":1734,"first_name":"Ivan","type":"private","last_name":"Ivanov","username":"iivanov"},"date":1435296025,"text":"/ver"}')
+        message_body = json.loads(r'{"message_id":1,"from":{"id":108929734,"first_name":"Wit","last_name":"Bot","username":"tg-wit-bot","is_bot":true},"chat":{"id":1734,"first_name":"Ivan","type":"private","last_name":"Ivanov","username":"iivanov"},"date":1435296025,"text":"/ver"}')
+        test_body = {
+            "message": message_body
+        }
 
         req = request.create_post(test_body)
         resp = main.handler(event=req, context={})
@@ -33,7 +39,7 @@ class Test_MainHandler(unittest.TestCase):
         self.assertIsNotNone(resp["body"])
 
         resp_body = json.loads(resp["body"])
-        self.assertTrue(resp_body["text"] == "v.0.3.0")
+        self.assertTrue(resp_body["text"].startswith("v.0.3.0"))
 
 
 

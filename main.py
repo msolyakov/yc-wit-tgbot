@@ -7,21 +7,29 @@ from wit import withelper
 def handler(event, context):
     answer = None
     try:
-        body = json.loads(event['body'])
+        body = json.loads(event["body"])
         msgh = msghandler.MsgHandler(handle_command, handle_text, handle_voice)
-        answer = msgh.handle_message(body)
+        answer = msgh.handle_message(body["message"])
+
     except Exception as ex: 
-        if os.environ.get('DEBUG') == 'TRUE':
-            answer = 'Error occured: \r\n' + ex.__str__ #TODO: Add logging
+        if os.environ.get('DEBUG'):
+            answer = 'Error occured. {}'.format(str(ex))
 
     return response.create_text(answer) if answer else response.create_empty()
 
 
 def handle_command(cmd, args):
-    # TODO
+    _debug = os.environ.get('DEBUG')
     _result = None
-    if cmd == 'ver': # Send version by command 
-        _result = 'v.0.3.0'
+
+    # TODO
+    if _debug:
+        if cmd == 'debug':
+            _result = 'DEBUG {}'.format(args)
+
+    if cmd == 'ver': # Send version by command
+        _ver = 'v.0.3.0'
+        _result = '{0}, DEBUG = {1}'.format(_ver, _debug) if _debug else _ver
     
     return _result
 
