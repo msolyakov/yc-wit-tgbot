@@ -37,6 +37,7 @@ def handle_text(text):
     # return withelper.prosess_text(text)
     return text
 
-def handle_voice(audio):
-    return 'Voice processing will be implemented soon'
+def handle_voice(voice):
+    _debug_trace = 'DEBUG file_id = {0}, duration = {1}, mime_type = {2}, file_size = {3}'.format(voice.file_id, voice.duration, voice.mime_type, voice.file_size)
+    return _debug_trace if os.environ.get('DEBUG') else 'Voice processing will be implemented soon'
 

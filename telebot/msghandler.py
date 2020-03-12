@@ -1,3 +1,4 @@
+import os
 import json
 from telebot import types
 from telebot import util
@@ -27,7 +28,10 @@ class MsgHandler():
                 _result_text = self.text_callback(_text)
 
         elif _content_type == 'voice':
-            _result_text = self.voice_callback()
+            _result_text = self.voice_callback(self.message.voice)
+
+        elif os.environ.get('DEBUG'):
+             _result_text = 'DEBUG content_type = {0}'.format(_content_type)
 
         # Bot always replies with text message   
         return bothelper.new_message(self.message.chat.id, _result_text) if _result_text else None
